@@ -1,20 +1,20 @@
 package tobyspring.config.autoconfig;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import tobyspring.config.ConditionalMyOnClass;
 import tobyspring.config.MyAutoConfiguration;
 
 @MyAutoConfiguration
-@ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
-public class TomcatWebServerConfig {
+@ConditionalMyOnClass("org.eclipse.jetty.server.Server")
+public class JettyWebServerConfig {
 
-    @Bean("tomcatWebServletFactory")
-    @ConditionalOnMissingBean // 빈이 등록되어있지 않으면 등록
+    @Bean("jettyWebServletFactory")
+    @ConditionalOnMissingBean
     public ServletWebServerFactory serverFactory() {
-        return new TomcatServletWebServerFactory();
+        return new JettyServletWebServerFactory();
     }
 
 }
