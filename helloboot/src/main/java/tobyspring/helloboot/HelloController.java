@@ -19,7 +19,9 @@ public class HelloController {
     @GetMapping("/hello")
     public String hello(String name) {
 
-        return helloService.sayHello(Objects.requireNonNull(name));
+        if (name == null || name.length() == 0) throw new IllegalStateException();
+
+        return helloService.sayHello(name);
     }
 
 }
